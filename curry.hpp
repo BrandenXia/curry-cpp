@@ -1,3 +1,6 @@
+#ifndef CURRY_HPP
+#define CURRY_HPP
+
 #include <cstddef>
 #include <functional>
 #include <tuple>
@@ -45,9 +48,6 @@ struct __tuple_slice {
 
 template <typename Tuple, std::size_t Begin, std::size_t End>
 using __tuple_slice_t = typename __tuple_slice<Tuple, Begin, End>::type;
-
-using test = std::tuple<int, double, char>;
-using test_slice = __tuple_slice_t<test, 1, 3>; // double, char
 
 template <typename F, typename Applied = std::tuple<>,
           typename Remain = typename __func_info<F>::argument_type>
@@ -102,3 +102,5 @@ inline constexpr auto curried(F t) {
 }
 
 } // namespace curry
+
+#endif

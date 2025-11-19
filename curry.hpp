@@ -56,8 +56,6 @@ struct __curried {
   typename func_info::func_t func;
   Applied applied_args;
 
-  using return_t = typename func_info::return_type;
-
   template <typename... Args>
   static constexpr __ordering __cmp_remain() {
     return cmp(sizeof...(Args), std::tuple_size_v<Remain>);
@@ -67,7 +65,7 @@ struct __curried {
             std::enable_if_t<__cmp_remain<Args...>() == __ordering::EQ &&
                                  std::is_same_v<std::tuple<Args...>, Remain>,
                              bool> = true>
-  auto operator()(Args... args) -> return_t {
+  auto operator()(Args... args) -> typename func_info::return_type {
     auto new_applied = std::tuple_cat(applied_args, std::make_tuple(args...));
     return std::apply(func, new_applied);
   };

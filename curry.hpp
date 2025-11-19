@@ -11,15 +11,15 @@ namespace curry {
 template <typename F>
 struct __func_info {
   template <typename R, typename... Args>
-  struct __arg_type_extractor {
+  struct __func_type_extractor {
     using return_type = R;
     using argument_type = std::tuple<Args...>;
 
-    __arg_type_extractor(std::function<R(Args...)>);
+    __func_type_extractor(std::function<R(Args...)>);
   };
 
   using func_t = decltype(std::function{std::declval<F>()});
-  using __extractor = decltype(__arg_type_extractor{std::declval<func_t>()});
+  using __extractor = decltype(__func_type_extractor{std::declval<func_t>()});
   using return_type = typename __extractor::return_type;
   using argument_type = typename __extractor::argument_type;
 };

@@ -2,7 +2,7 @@
 
 C++17 header-only library for function currying.
 
-Features:
+## Features
 
 - most of the callable types supported (anything that can be put into `std::function`)
 - Support any number of arguments in multiple number of calls (see example below)

@@ -6,7 +6,7 @@
 #include <tuple>
 #include <type_traits>
 
-namespace curry {
+namespace curry::detail {
 
 template <typename F>
 struct __func_info {
@@ -100,6 +100,12 @@ inline constexpr auto curried(F t) {
   using func_info = __func_info<F>;
   return __curried<typename func_info::func_t>{t};
 }
+
+} // namespace curry::detail
+
+namespace curry {
+
+using detail::curried;
 
 } // namespace curry
 

@@ -8,6 +8,17 @@ C++17 header-only library for function currying.
 - Support any number of arguments in multiple number of calls (see example below)
 - no template parameter required
 
+## Usage
+
+Just include the header:
+
+```cpp
+#include "curry.hpp"
+```
+
+Then you can use the `curry::curried` function to create a curried version of
+your function.
+
 ## Example
 
 ```cpp

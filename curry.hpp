@@ -65,7 +65,7 @@ struct __curried {
             std::enable_if_t<__cmp_remain<Args...>() == __ordering::EQ &&
                                  std::is_same_v<std::tuple<Args...>, Remain>,
                              bool> = true>
-  auto operator()(Args... args) -> typename func_info::return_type {
+  auto operator()(Args &&...args) -> typename func_info::return_type {
     auto new_applied = std::tuple_cat(
         applied_args, std::make_tuple(std::forward<Args>(args)...));
     return std::apply(func, new_applied);
@@ -83,7 +83,7 @@ struct __curried {
                     std::is_same_v<std::tuple<Args...>,
                                    __tuple_slice_t<Remain, 0, sizeof...(Args)>>,
                 bool> = true>
-  auto operator()(Args... args) {
+  auto operator()(Args &&...args) {
     auto new_applied = std::tuple_cat(
         applied_args, std::make_tuple(std::forward<Args>(args)...));
     return __curried<F, __new_applied_t<Args...>, __new_remain_t<Args...>>{
